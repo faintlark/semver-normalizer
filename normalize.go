@@ -33,13 +33,17 @@ func Normalize(input string) (string, error) {
 	}
 
 	var build string
+	hasBuild := false
 	if i := strings.IndexByte(s, '+'); i >= 0 {
+		hasBuild = true
 		build = s[i+1:]
 		s = s[:i]
 	}
 
 	var prerelease string
+	hasPrerelease := false
 	if i := strings.IndexByte(s, '-'); i >= 0 {
+		hasPrerelease = true
 		prerelease = s[i+1:]
 		s = s[:i]
 	}
@@ -52,7 +56,7 @@ func Normalize(input string) (string, error) {
 	var b strings.Builder
 	b.WriteString(core)
 
-	if prerelease != "" {
+	if hasPrerelease {
 		pre, err := normalizeIdentifiers(prerelease, true)
 		if err != nil {
 			return "", fmt.Errorf("prerelease: %w", err)
@@ -61,7 +65,7 @@ func Normalize(input string) (string, error) {
 		b.WriteString(pre)
 	}
 
-	if build != "" {
+	if hasBuild {
 		bld, err := normalizeIdentifiers(build, false)
 		if err != nil {
 			return "", fmt.Errorf("build metadata: %w", err)

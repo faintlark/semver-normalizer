@@ -56,10 +56,10 @@ err := semverfmt.Stream(os.Stdin, os.Stdout)
 
 ## Status
 
-Early. The core normalization rules above are implemented and tested
-by hand; see the roadmap in commit history for what's still missing
-(a real test suite, comparison/sorting, a `--strict` mode that refuses
-to guess at malformed input instead of erroring).
+Early. The core normalization rules above are implemented and covered
+by `normalize_test.go`; see the roadmap in commit history for what's
+still missing (comparison/sorting, a `--strict` mode that refuses to
+guess at malformed input instead of erroring).
 
 ## License
 
